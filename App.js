@@ -28,33 +28,29 @@ type Props = {};
 export default class App extends Component<Props> {
 
   getMoviesFromApiAsync() {
-    const apiURL = 'http://heal-thy.herokuapp.com/api/v1/readings';
+    const apiURL = 'http://heal-thy.herokuapp.com/api/v2/readings';
     //const apiURL = 'https://facebook.github.io/react-native/movies.json';
 
     return fetch(apiURL)
       .then((response) => response.json())
       .then((responseJson) => {
-        //return responseJson.movies;
-        //console.log( 'responseJson.movies',responseJson.movies )
         //console.log( 'responseJson',responseJson )
         
         //return responseJson
-
+        /*
+        // API: v1
         //consverting Object to Array
         var aReadings = [];
         var property = null;
         for (property in responseJson) {
-          /*
-          if (object.hasOwnProperty(property)) {
-          // do stuff
-          }
-          */
           //console.log('property',property)
           //console.log('data',responseJson[property])
           aReadings.push( responseJson[property] )
         }
+        */
+       // API: v2
 
-        this.setState( {aReadings: aReadings} )
+        this.setState( {aReadings: responseJson.readingList, oneImageURL: responseJson.imageURL} )
       })
       .catch((error) => {
         console.error(error);
@@ -73,7 +69,7 @@ export default class App extends Component<Props> {
 
   constructor(props){
     super(props)
-    this.state = { aReadings:[] };
+    this.state = { aReadings:[], oneImageURL:'http://lorempixel.com/400/200/sports/' };
 
     this.currentClickedURL = '';
 
@@ -120,7 +116,7 @@ export default class App extends Component<Props> {
             </Text>
             <View style={{height:2, marginTop:10, marginBottom:2, backgroundColor:'#cccccc'}}></View>
             <Text style={styles.welcomeMessage}> 
-              Being healthy is simple and we are here to help. Being healthy is simple and we are here to help. Being healthy is simple and we are here to help. 
+              Being healthy is simple and you can have it, no matter what. 
             </Text>
           
           </ScrollView>
@@ -133,7 +129,8 @@ export default class App extends Component<Props> {
         </View>
         <View style={styles.slide3}>
           <Text style={styles.text}>Today</Text>
-          <Image source={{uri: 'https://imageshack.com/a/img538/1592/0q9ZgT.jpg'}} style={{width:'98%', height:'90%'}} />
+          { /* <Image source={{uri: 'http://lorempixel.com/400/200/sports/'}} style={{width:'98%', height:'90%'}} /> */}
+          <Image source={{uri: this.state.oneImageURL}} style={{width:'98%', height:'90%'}} />
         </View>
       </Swiper>
     );
