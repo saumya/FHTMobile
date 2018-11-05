@@ -1,8 +1,11 @@
 FindHealth.Today
 ==========================
 
+### License
+ [MIT][mit]
 
-
+### Privay Policy
+ [Generator][pp]
 
 ### PlayStore Reference
 
@@ -35,3 +38,5 @@ FindHealth.Today
 
 [playstore1]: https://facebook.github.io/react-native/docs/signed-apk-android
 
+[mit]: https://mit-license.org/
+[pp]: https://app-privacy-policy-generator.firebaseapp.com/
